@@ -1,4 +1,4 @@
-// Edit the four gifts and their coupon messages here.
+// Elina's harder mystery claw machine: gifts and love notes share the same capsules.
 const GIFTS = {
   massage: { emoji: '💆‍♀️', name: 'Free Massage', description: 'A relaxing massage from me, whenever you want. You deserve it! 💗', coupon: 'ONE FREE MASSAGE' },
   kiss: { emoji: '💋', name: 'Unlimited Kiss', description: 'All the kisses you want, forever and always. No limits! 💗', coupon: 'UNLIMITED KISSES' },
@@ -19,8 +19,8 @@ const LOVE_MESSAGES = [
   'I love waking up to ur kisses baby'
 ];
 
-const giftTargets = [...document.querySelectorAll('[data-prize]')];
-const noteTargets = [...document.querySelectorAll('[data-message-slot]')];
+
+const capsules = [...document.querySelectorAll('[data-capsule]')];
 const claw = document.getElementById('claw');
 const windowEl = document.getElementById('window');
 const statusEl = document.getElementById('status');
@@ -28,93 +28,86 @@ const dialog = document.getElementById('win-dialog');
 const left = document.getElementById('left');
 const right = document.getElementById('right');
 const grab = document.getElementById('grab');
-const giftsTab = document.getElementById('gifts-tab');
-const notesTab = document.getElementById('notes-tab');
-let pos = 50;
+let position = 50;
 let busy = false;
-let mode = 'gifts';
-let collected = new Set();
-let discoveredNotes = new Set();
-try {
-  collected = new Set(JSON.parse(localStorage.getItem('elina-love-claw-collected') || '[]').filter(k => GIFTS[k]));
-  discoveredNotes = new Set(JSON.parse(localStorage.getItem('elina-love-claw-notes') || '[]').filter(n => Number.isInteger(n) && n >= 0 && n < LOVE_MESSAGES.length));
-} catch (_) { /* Storage can be unavailable in private browsers */ }
 
-// Keep prizes and notes saved privately in this browser; do not display spoilers.
-function renderCollection() { /* Surprise gifts are only revealed after a catch. */ }
-function switchMode(next) {
-  if (busy || dialog.open) return;
-  mode = next;
-  giftsTab.classList.toggle('active', mode === 'gifts');
-  notesTab.classList.toggle('active', mode === 'notes');
-  giftsTab.setAttribute('aria-pressed', String(mode === 'gifts'));
-  notesTab.setAttribute('aria-pressed', String(mode === 'notes'));
-  giftTargets.forEach(el => { el.hidden = mode !== 'gifts'; });
-  noteTargets.forEach(el => { el.hidden = mode !== 'notes'; });
-  statusEl.textContent = mode === 'gifts' ? 'Catch a sweet prize! ♡' : 'Catch an envelope to read a message from Josh! 💌';
+const deckItems = [
+  ...Object.keys(GIFTS).map(key => ({ type: 'gift', key })),
+  ...LOVE_MESSAGES.map((_, index) => ({ type: 'message', index }))
+];
+let deck = [];
+function nextSurprise() {
+  // Draw without replacement: every gift and message will appear before repeats.
+  if (!deck.length) {
+    deck = [...deckItems];
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+  }
+  return deck.pop();
 }
 function move(direction) {
-  if (busy) return;
-  pos = Math.max(12, Math.min(88, pos + direction * 8));
-  claw.style.left = `${pos}%`;
-  statusEl.textContent = 'Looking good! Drop the claw when you’re ready ♡';
+  if (busy || dialog.open) return;
+  position = Math.max(10, Math.min(90, position + direction * 4));
+  claw.style.left = position + '%';
 }
 function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 function setLocked(value) {
   busy = value;
-  [left, right, grab, giftsTab, notesTab].forEach(b => b.disabled = value);
+  [left, right, grab].forEach(button => button.disabled = value);
 }
-function nearestPrize() {
-  const centerX = claw.getBoundingClientRect().left + claw.getBoundingClientRect().width / 2;
-  let best = null;
-  let minDistance = Infinity;
-  for (const el of mode === 'gifts' ? giftTargets : noteTargets) {
-    const rect = el.querySelector('.toy').getBoundingClientRect();
-    const distance = Math.abs(centerX - (rect.left + rect.width / 2));
-    if (distance < minDistance) { minDistance = distance; best = el; }
+function nearestCapsule() {
+  const clawBox = claw.getBoundingClientRect();
+  const clawX = clawBox.left + clawBox.width / 2;
+  let best = null, distance = Infinity;
+  for (const capsule of capsules) {
+    const rect = capsule.querySelector('.toy').getBoundingClientRect();
+    const d = Math.abs(clawX - (rect.left + rect.width / 2));
+    if (d < distance) { distance = d; best = capsule; }
   }
-  return minDistance <= Math.max(41, windowEl.clientWidth * .105) ? best : null;
-}
-function getNoteIndex(slot) {
-  // Each slot starts with a different note; prioritize undiscovered notes so she can collect all eight.
-  const available = LOVE_MESSAGES.map((_, i) => i).filter(i => !discoveredNotes.has(i));
-  if (available.length) return available[slot % available.length];
-  return slot % LOVE_MESSAGES.length;
+  return { target: best, distance };
 }
 async function play() {
-  if (busy) return;
+  if (busy || dialog.open) return;
   setLocked(true);
-  statusEl.textContent = 'Here goes nothing... ✨';
-  const target = nearestPrize();
-  const drop = target ? Math.max(100, target.getBoundingClientRect().top - windowEl.getBoundingClientRect().top - 78) : windowEl.clientHeight * .54;
-  claw.style.top = `${16 + drop}px`;
+  // The claw drifts slightly while lowering, so careful timing matters.
+  const drift = (Math.random() * 8 - 4);
+  const finalPosition = Math.max(10, Math.min(90, position + drift));
+  claw.style.left = finalPosition + '%';
+  await delay(260);
+  const { target, distance } = nearestCapsule();
+  const targetWidth = windowEl.clientWidth;
+  const perfectTolerance = Math.max(13, targetWidth * .036);
+  const maximumTolerance = Math.max(22, targetWidth * .057);
+  const aligned = target && distance <= maximumTolerance;
+  const chance = distance <= perfectTolerance ? 0.72 : 0.36;
+  const caught = aligned && Math.random() < chance;
+  const drop = aligned
+    ? Math.max(90, target.getBoundingClientRect().top - windowEl.getBoundingClientRect().top - 77)
+    : windowEl.clientHeight * .56;
+  claw.style.top = (16 + drop) + 'px';
   await delay(770);
   claw.classList.add('closed');
-  await delay(360);
-  if (target) target.classList.add('caught');
+  await delay(310);
+  if (caught) target.classList.add('caught');
   claw.style.top = '16px';
-  await delay(850);
+  await delay(820);
   claw.classList.remove('closed');
-  if (target) {
-    if (mode === 'gifts') {
-      const key = target.dataset.prize;
-      collected.add(key);
-      try { localStorage.setItem('elina-love-claw-collected', JSON.stringify([...collected])); } catch (_) {}
-      renderCollection();
-      showWin(GIFTS[key]);
-      statusEl.textContent = `You won ${GIFTS[key].name}! Try another ♡`;
-    } else {
-      const index = getNoteIndex(Number(target.dataset.messageSlot));
-      discoveredNotes.add(index);
-      try { localStorage.setItem('elina-love-claw-notes', JSON.stringify([...discoveredNotes])); } catch (_) {}
-      renderCollection();
-      showNote(LOVE_MESSAGES[index]);
-      statusEl.textContent = 'You found a message from Josh! 💌';
-    }
-    await delay(450);
+  position = finalPosition;
+  if (caught) {
+    const prize = nextSurprise();
+    if (prize.type === 'gift') showWin(GIFTS[prize.key]);
+    else showNote(LOVE_MESSAGES[prize.index]);
+    await delay(400);
     target.classList.remove('caught');
   } else {
-    statusEl.textContent = 'So close! Move toward a prize and try again ♡';
+    // Missed or slipped grabs can be retried for free.
+    statusEl.textContent = aligned ? 'It slipped! Try again ♡' : 'Almost! Aim closer and try again ♡';
+    windowEl.classList.remove('miss-flash');
+    void windowEl.offsetWidth;
+    windowEl.classList.add('miss-flash');
+    setTimeout(() => windowEl.classList.remove('miss-flash'), 700);
   }
   setLocked(false);
 }
@@ -154,8 +147,7 @@ function celebrate() {
   }
   setTimeout(() => confetti.replaceChildren(), 4300);
 }
-giftsTab.addEventListener('click', () => switchMode('gifts'));
-notesTab.addEventListener('click', () => switchMode('notes'));
+
 left.addEventListener('click', () => move(-1));
 right.addEventListener('click', () => move(1));
 grab.addEventListener('click', play);
@@ -167,4 +159,3 @@ window.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
   if (e.code === 'Space' && e.target.tagName !== 'BUTTON') { e.preventDefault(); play(); }
 });
-renderCollection();
