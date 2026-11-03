@@ -40,30 +40,8 @@ try {
   discoveredNotes = new Set(JSON.parse(localStorage.getItem('elina-love-claw-notes') || '[]').filter(n => Number.isInteger(n) && n >= 0 && n < LOVE_MESSAGES.length));
 } catch (_) { /* Storage can be unavailable in private browsers */ }
 
-function renderCollection() {
-  document.getElementById('count').textContent = `${collected.size} / 4`;
-  for (const row of document.querySelectorAll('[data-collection]')) {
-    const isCollected = collected.has(row.dataset.collection);
-    row.classList.toggle('collected', isCollected);
-    row.querySelector('.check').textContent = isCollected ? '♥' : '○';
-  }
-  document.getElementById('notes-count').textContent = `${discoveredNotes.size} / ${LOVE_MESSAGES.length}`;
-  const notesList = document.getElementById('notes-list');
-  notesList.replaceChildren();
-  if (discoveredNotes.size === 0) {
-    const empty = document.createElement('p');
-    empty.className = 'notes-empty';
-    empty.textContent = 'Your love notes will appear here ♡';
-    notesList.appendChild(empty);
-  } else {
-    for (const index of [...discoveredNotes].sort((a, b) => a - b)) {
-      const item = document.createElement('div');
-      item.className = 'saved-note';
-      item.textContent = `💌 “${LOVE_MESSAGES[index]}”`;
-      notesList.appendChild(item);
-    }
-  }
-}
+// Keep prizes and notes saved privately in this browser; do not display spoilers.
+function renderCollection() { /* Surprise gifts are only revealed after a catch. */ }
 function switchMode(next) {
   if (busy || dialog.open) return;
   mode = next;
@@ -183,16 +161,6 @@ right.addEventListener('click', () => move(1));
 grab.addEventListener('click', play);
 document.getElementById('close-dialog').addEventListener('click', () => dialog.close());
 document.getElementById('play-again').addEventListener('click', () => dialog.close());
-document.getElementById('reset').addEventListener('click', () => {
-  collected.clear();
-  discoveredNotes.clear();
-  try {
-    localStorage.removeItem('elina-love-claw-collected');
-    localStorage.removeItem('elina-love-claw-notes');
-  } catch (_) {}
-  renderCollection();
-  statusEl.textContent = 'Collection reset. Ready for more love? ♡';
-});
 window.addEventListener('keydown', e => {
   if (dialog.open || e.altKey || e.ctrlKey || e.metaKey || ['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
   if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
