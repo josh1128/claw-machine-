@@ -24,3 +24,11 @@
 .prize[data-prize] .toy{background:linear-gradient(145deg,#fff7ba,#ffc7e0);border-color:#fff4fd}
 .prize[data-prize] span{font-size:12px;color:#a05276}
 @media(max-width:810px){.layout{grid-template-columns:minmax(0,530px)}}
+
+/* Harder, single mixed mystery game: six indistinguishable capsules. */
+.machine-tabs{display:none}
+.mystery-capsule .toy{width:52px;height:52px;font-size:28px;border-radius:17px;background:linear-gradient(145deg,#fff7ba,#ffc7e0);border:3px solid #fff4fd;animation-delay:var(--delay)}
+.mystery-capsule span{font-size:15px;font-weight:700;color:#ab557d;margin-top:5px}
+.window.miss-flash{animation:miss-pulse .5s ease-out}
+@keyframes miss-pulse{50%{box-shadow:inset 0 0 0 5px #ffffff66,inset 0 0 50px #ff7ca555}}
+@media(max-width:510px){.mystery-capsule .toy{width:40px;height:43px;font-size:24px;border-radius:13px}.mystery-capsule span{font-size:12px}}
