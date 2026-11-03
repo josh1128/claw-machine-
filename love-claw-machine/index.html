@@ -14,15 +14,11 @@
   <main class="app">
     <header class="intro">
       <h1>Elina's <span>Love Arcade</span></h1>
-      <p>Catch a mystery gift or a secret love note. Every grab is a surprise! 💌</p>
+      <p>Mystery gifts and secret messages are all mixed together. Can you catch one? 💌</p>
     </header>
 
     <div class="layout">
       <section class="machine-wrap" aria-label="Interactive claw machine">
-        <div class="machine-tabs" role="group" aria-label="Choose what to catch">
-          <button id="gifts-tab" class="machine-tab active" aria-pressed="true">🎁 Sweet prizes</button>
-          <button id="notes-tab" class="machine-tab" aria-pressed="false">💌 My texts to you</button>
-        </div>
         <div class="machine">
           <div class="machine-header"><span>♡</span> LOVE CLAW <span>♡</span></div>
           <div class="window" id="window">
@@ -33,18 +29,16 @@
               <div class="claw-head"><i></i><i></i><i></i></div>
               <div class="claw-prongs"><span></span><span></span></div>
             </div>
-            <div class="prize" style="--x:17%;--y:67%" data-prize="massage"><div class="toy">🎁</div><span>Mystery</span></div>
-            <div class="prize" style="--x:39%;--y:77%" data-prize="kiss"><div class="toy">🎁</div><span>Mystery</span></div>
-            <div class="prize" style="--x:63%;--y:65%" data-prize="dinner"><div class="toy">🎁</div><span>Mystery</span></div>
-            <div class="prize" style="--x:84%;--y:77%" data-prize="boba"><div class="toy">🎁</div><span>Mystery</span></div>
-            <div class="prize letter-prize" style="--x:17%;--y:67%" data-message-slot="0" hidden><div class="toy">💌</div><span>Love note</span></div>
-            <div class="prize letter-prize" style="--x:39%;--y:77%" data-message-slot="1" hidden><div class="toy">💗</div><span>For you</span></div>
-            <div class="prize letter-prize" style="--x:63%;--y:65%" data-message-slot="2" hidden><div class="toy">💌</div><span>From Josh</span></div>
-            <div class="prize letter-prize" style="--x:84%;--y:77%" data-message-slot="3" hidden><div class="toy">💗</div><span>Open me</span></div>
+            <div class="prize mystery-capsule" style="--x:14%;--y:69%;--delay:0s" data-capsule="0"><div class="toy">🎁</div><span>?</span></div>
+            <div class="prize mystery-capsule" style="--x:28.5%;--y:78%;--delay:-0.6s" data-capsule="1"><div class="toy">🎁</div><span>?</span></div>
+            <div class="prize mystery-capsule" style="--x:43%;--y:67%;--delay:-1.2s" data-capsule="2"><div class="toy">🎁</div><span>?</span></div>
+            <div class="prize mystery-capsule" style="--x:57%;--y:78%;--delay:0s" data-capsule="3"><div class="toy">🎁</div><span>?</span></div>
+            <div class="prize mystery-capsule" style="--x:71.5%;--y:69%;--delay:-0.6s" data-capsule="4"><div class="toy">🎁</div><span>?</span></div>
+            <div class="prize mystery-capsule" style="--x:86%;--y:78%;--delay:-1.2s" data-capsule="5"><div class="toy">🎁</div><span>?</span></div>
             <div class="window-floor"></div>
           </div>
           <div class="machine-panel">
-            <div class="panel-label"><span>✦</span> LOVE IS IN THE AIR <span>✦</span></div>
+            <div class="panel-label"><span>✦</span> MYSTERY MODE <span>✦</span></div>
             <div class="game-controls">
               <button class="arrow" id="left" aria-label="Move claw left">←</button>
               <button class="grab" id="grab">GRAB! <span>♡</span></button>
