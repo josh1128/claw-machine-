@@ -71,7 +71,7 @@ function refreshUI() {
 function move(direction) {
   refreshUI();
   if (busy || prizeClaimedToday() || dialog.open) return;
-  position = Math.max(10, Math.min(90, position + direction * 4));
+  position = Math.max(10, Math.min(90, position + direction * 5));
   claw.style.left = position + '%';
 }
 function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
@@ -123,18 +123,18 @@ async function play() {
   refreshUI();
   if (busy || prizeClaimedToday() || dialog.open) return;
   setLocked(true);
-  // Freeze moving boxes at the instant GRAB is pressed. Drift makes alignment matter.
+  // Freeze moving boxes at the instant GRAB is pressed. Bigger drift and a narrow grip make this expert mode.
   windowEl.classList.add('grabbing');
-  const drift=(Math.random()*8-4);
+  const drift=(Math.random()*18-9);
   const finalPosition=Math.max(10,Math.min(90,position+drift));
   claw.style.left=finalPosition+'%';
   await delay(260);
   const {target,distance}=nearestCapsule();
   const width=windowEl.clientWidth;
-  const excellent=Math.max(13,width*.036);
-  const maximum=Math.max(22,width*.057);
+  const excellent=Math.max(8,width*.022);
+  const maximum=Math.max(14,width*.038);
   const aligned=target && distance<=maximum;
-  const success=aligned && Math.random()<(distance<=excellent ? .72 : .36);
+  const success=aligned && Math.random()<(distance<=excellent ? .40 : .14);
   const drop=aligned ? Math.max(90,target.getBoundingClientRect().top-windowEl.getBoundingClientRect().top-77) : windowEl.clientHeight*.56;
   claw.style.top=(16+drop)+'px';
   await delay(770);
