@@ -32,3 +32,24 @@
 .window.miss-flash{animation:miss-pulse .5s ease-out}
 @keyframes miss-pulse{50%{box-shadow:inset 0 0 0 5px #ffffff66,inset 0 0 50px #ff7ca555}}
 @media(max-width:510px){.mystery-capsule .toy{width:40px;height:43px;font-size:24px;border-radius:13px}.mystery-capsule span{font-size:12px}}
+
+/* Moving capsules and stamp rewards */
+.mystery-capsule{animation:capsule-sway 2.15s ease-in-out infinite alternate;animation-delay:var(--delay)}
+.window.grabbing .mystery-capsule{animation-play-state:paused}
+.mystery-capsule.caught{animation:none;opacity:0;transform:translate(-50%,-100%)}
+@keyframes capsule-sway{
+  from{transform:translate(calc(-50% - 11px),-50%)}
+  to{transform:translate(calc(-50% + 11px),-50%)}
+}
+.ticket-panel{max-width:510px;margin:18px auto 0;padding:17px 20px;border:2px solid #ffd4e2;border-radius:22px;background:#fffdfd;box-shadow:0 8px 24px #d879a61a;text-align:center}
+.ticket-top{display:flex;align-items:center;justify-content:space-between;font:600 18px Fredoka,sans-serif;gap:10px}
+.ticket-top strong{color:#d75484;background:#fff0f5;padding:6px 12px;border-radius:15px;font-size:16px}
+.stamp-track{display:flex;justify-content:center;gap:8px;margin:15px 0}
+.stamp-mark{display:grid;place-items:center;width:35px;height:35px;border-radius:50%;background:#fff3f7;border:2px dashed #efb4c8;color:#d49aad;font-size:20px}
+.stamp-mark.earned{background:#f46799;border-color:#e75688;color:white}
+.stamp-redeem{border:0;border-radius:15px;background:#e9568d;color:#fff;padding:12px 15px;font:600 15px Fredoka,sans-serif;cursor:pointer;width:100%}
+.stamp-redeem:disabled{background:#f6dce6;color:#bd8ba0;cursor:not-allowed}
+.ticket-caption{color:#a97c90;font-size:12px;margin:10px 0 0}
+.daily-message{margin:13px 0 0;font:600 15px Fredoka,sans-serif;color:#bc4874}
+.daily-message[hidden]{display:none}
+@media(max-width:510px){.ticket-panel{margin-top:13px;padding:14px}.stamp-mark{width:32px;height:32px;font-size:18px}.stamp-track{gap:5px}.ticket-top{font-size:16px}}
