@@ -34,12 +34,12 @@
 @media(max-width:510px){.mystery-capsule .toy{width:40px;height:43px;font-size:24px;border-radius:13px}.mystery-capsule span{font-size:12px}}
 
 /* Moving capsules and stamp rewards */
-.mystery-capsule{animation:capsule-sway 2.15s ease-in-out infinite alternate;animation-delay:var(--delay)}
+.mystery-capsule{animation:capsule-sway 1.15s ease-in-out infinite alternate;animation-delay:var(--delay)}
 .window.grabbing .mystery-capsule{animation-play-state:paused}
 .mystery-capsule.caught{animation:none;opacity:0;transform:translate(-50%,-100%)}
 @keyframes capsule-sway{
-  from{transform:translate(calc(-50% - 11px),-50%)}
-  to{transform:translate(calc(-50% + 11px),-50%)}
+  from{transform:translate(calc(-50% - 23px),-50%)}
+  to{transform:translate(calc(-50% + 23px),-50%)}
 }
 .ticket-panel{max-width:510px;margin:18px auto 0;padding:17px 20px;border:2px solid #ffd4e2;border-radius:22px;background:#fffdfd;box-shadow:0 8px 24px #d879a61a;text-align:center}
 .ticket-top{display:flex;align-items:center;justify-content:space-between;font:600 18px Fredoka,sans-serif;gap:10px}
