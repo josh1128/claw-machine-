@@ -63,3 +63,38 @@
 .read-again{display:block;margin:22px auto 0;border:0;border-radius:18px;background:#eb6694;color:white;padding:13px 23px;font:600 17px Fredoka,sans-serif;cursor:pointer}
 .read-again[hidden]{display:none}
 @media(max-width:510px){.love-letter{padding:17px;font-size:14px;line-height:1.7}.letter-modal{padding:24px 17px}}
+
+/* Cinematic grand-prize reveal with an opening envelope. */
+.reveal-stage{min-height:405px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:20px 8px}
+.reveal-stage[hidden],.letter-reveal[hidden]{display:none}
+.reveal-stage:before{content:"";position:absolute;inset:-80px;background:radial-gradient(circle,#ffcae7 0%,#ffe5f085 28%,transparent 69%);opacity:.3;transform:scale(.6)}
+.reveal-stage.is-opening:before{animation:reveal-glow 2.6s ease-out forwards}
+.reveal-aura{position:relative;font-size:35px;letter-spacing:24px;color:#f785ae;opacity:0}
+.reveal-stage.is-opening .reveal-aura{animation:reveal-sparkle 2.4s ease-in forwards}
+.envelope{width:190px;height:128px;position:relative;margin:38px auto 25px;filter:drop-shadow(0 14px 18px #b95b8955);transform:scale(.65)}
+.reveal-stage.is-opening .envelope{animation:envelope-entry .85s cubic-bezier(.2,1.3,.5,1) forwards}
+.envelope-back{position:absolute;inset:0;background:#ffc0d6;border:3px solid #ee8dae;border-radius:12px}
+.envelope-front{position:absolute;inset:0;background:linear-gradient(35deg,#f9a5c4 0 49.5%,transparent 50%),linear-gradient(-35deg,#f3b8d0 0 49.5%,transparent 50%),linear-gradient(0deg,#f4a7c4,#ffd0df);clip-path:polygon(0 26%,50% 68%,100% 26%,100% 100%,0 100%);border-radius:0 0 12px 12px;z-index:4}
+.envelope-flap{position:absolute;left:0;top:0;width:100%;height:72%;background:#f587af;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;z-index:6;backface-visibility:hidden}
+.reveal-stage.is-opening .envelope-flap{animation:flap-open .7s ease-in-out 1.1s forwards}
+.envelope-letter{position:absolute;left:18px;right:18px;top:9px;height:101px;background:#fffdfd;border-radius:6px;z-index:3;display:grid;place-items:center;font-size:44px;color:#ef75a1}
+.reveal-stage.is-opening .envelope-letter{animation:letter-rise .95s ease-out 1.55s forwards}
+.envelope-seal{position:absolute;z-index:7;left:50%;top:41%;transform:translate(-50%,-50%);background:#fff4fa;border-radius:50%;width:39px;height:39px;display:grid;place-items:center;color:#e95c8d;font-size:24px;box-shadow:0 3px 8px #a6476b33}
+.reveal-stage.is-opening .envelope-seal{animation:seal-vanish .4s ease-out 1.03s forwards}
+.reveal-message{position:relative;font:600 19px Fredoka,sans-serif;color:#bf517d;text-align:center;opacity:0}
+.reveal-stage.is-opening .reveal-message{animation:message-appear 1.5s ease 1s forwards}
+.letter-reveal{animation:letter-fade-in .7s ease both}
+.voice-card{border:2px solid #f8b9d0;border-radius:20px;background:linear-gradient(125deg,#fff2f8,#fffdfd);padding:17px;margin:18px 0;text-align:left}
+.voice-card-heading{font:600 19px Fredoka,sans-serif;color:#a74571}
+.voice-card p{margin:6px 0 13px;font-size:13px;color:#ab788c}
+.voice-card audio{display:block;width:100%;height:45px;accent-color:#e85b92}
+@keyframes reveal-glow{30%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(2)}}
+@keyframes envelope-entry{0%{transform:translateY(55px) scale(.5);opacity:0}100%{transform:translateY(0) scale(1);opacity:1}}
+@keyframes flap-open{0%{transform:rotateX(0deg)}100%{transform:rotateX(175deg);z-index:1}}
+@keyframes letter-rise{to{transform:translateY(-67px) scale(1.05)}}
+@keyframes seal-vanish{to{opacity:0;transform:translate(-50%,-50%) scale(.4)}}
+@keyframes message-appear{to{opacity:1}}
+@keyframes reveal-sparkle{30%,80%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(1.6)}}
+@keyframes letter-fade-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.reveal-stage *,.letter-reveal{animation-duration:.01ms!important}}
+@media(max-width:510px){.reveal-stage{min-height:355px}.reveal-message{font-size:16px}.voice-card{padding:14px}}
