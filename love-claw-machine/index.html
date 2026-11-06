@@ -14,7 +14,7 @@
   <main class="app">
     <header class="intro">
       <h1>Elina's <span>Love Arcade</span></h1>
-      <p>Catch moving mystery boxes to discover gifts and love notes. 💌</p>
+      <p>One special surprise is waiting for you. Catch a mystery box to open it. 💌</p>
     </header>
 
     <div class="layout">
@@ -49,13 +49,7 @@
           <div class="machine-base"></div>
         </div>
         <p class="hint" id="status" role="status" aria-live="polite" hidden></p>
-        <section class="ticket-panel" aria-label="Love stamp rewards">
-          <div class="ticket-top"><span>🎟️ Love stamps</span><strong><span id="stamp-count">0</span> / 7</strong></div>
-          <div class="stamp-track" aria-label="Stamp collection" id="stamp-track"></div>
-          <button id="redeem-stamps" class="stamp-redeem" disabled>Redeem 7 stamps for a mystery prize ♡</button>
-          <p class="ticket-caption">Catch a love note to earn a stamp. One prize per day.</p>
-          <p id="daily-message" class="daily-message" role="status" aria-live="polite" hidden></p>
-        </section>
+        <button id="read-again" class="read-again" hidden>💌 Read your letter again</button>
       </section>
 
     </div>
@@ -63,14 +57,14 @@
   </main>
 
   <dialog id="win-dialog" aria-labelledby="win-title">
-    <div class="modal-content">
-      <button class="close" id="close-dialog" aria-label="Close">×</button>
-      <p class="modal-top" id="modal-top">✧ YOU WON! ✧</p>
-      <div class="won-emoji" id="win-emoji">🧋</div>
-      <h2 id="win-title">Bubble Tea</h2>
-      <p id="win-description">Your favorite drink, on me!</p>
-      <div class="coupon" id="win-coupon-box"><span id="coupon-label">LOVE COUPON</span><strong id="win-coupon">ONE BUBBLE TEA DATE</strong><small id="coupon-footer">Redeem with Josh · No expiration ♡</small></div>
-      <button class="play-again" id="play-again">Play again ♡</button>
+    <div class="modal-content letter-modal">
+      <button class="close" id="close-dialog" aria-label="Close letter">×</button>
+      <p class="modal-top">✧ A LETTER JUST FOR YOU ✧</p>
+      <div class="won-emoji">💌</div>
+      <h2 id="win-title">For Elina, with love</h2>
+      <div class="love-letter" id="love-letter"></div>
+      <p class="letter-signoff">Love, Josh ♡</p>
+      <button class="play-again" id="play-again">Keep this in your heart ♡</button>
     </div>
   </dialog>
   <div id="confetti" aria-hidden="true"></div>
