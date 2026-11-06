@@ -1,5 +1,5 @@
 // One secret prize: Josh's personal letter to Elina.
-// The claw stays challenging, but every successful catch reveals the same letter.
+// The claw stays challenging, and every successful catch reveals the same letter. Replaying is always allowed.
 const LETTER = "Hi baby,\n\nSorry for making you cry these past couple of days. First for making it seem like I don't miss you and second when you thought I was frustrated. First, i want to let you know that i always miss you, everyday at all times. That is why I made this for you. Also, Its normal to feel those things. I promise you that i will always free up some time after work to facetime you. I love you and I always will. I will do anything for you. I yearn for you. I love every part of you, every single quirks, smile and kisses. You're the best thing to has ever happened to me and I know we'll spend the rest of our lives together. I'm not hopeful, because I know for sure if we're comitted to building the future together then we'll grow old together, travel around the world together and play volleyball and rave until we're 50. I will make sure to give you the reassurance and love that you deserve. When you feel upset or sad, I will cheer you up instead of being cold like I was before. I love you baby and here is to many years together";
 const capsules = [...document.querySelectorAll('[data-capsule]')];
 const claw = document.getElementById('claw');
@@ -16,11 +16,11 @@ let busy = false;
 let opened = false;
 try { opened = localStorage.getItem(STORAGE_KEY) === 'yes'; } catch (_) {}
 function updateControls() {
-  [left,right,grab].forEach(b => { b.disabled = busy || opened || dialog.open; });
+  [left,right,grab].forEach(b => { b.disabled = busy || dialog.open; });
   readAgain.hidden = !opened;
 }
 function move(direction) {
-  if (busy || opened || dialog.open) return;
+  if (busy || dialog.open) return;
   position = Math.max(10, Math.min(90, position + direction * 5));
   claw.style.left = position + '%';
 }
@@ -60,7 +60,7 @@ function showLetter() {
   updateControls();
 }
 async function play() {
-  if (busy || opened || dialog.open) return;
+  if (busy || dialog.open) return;
   busy = true; updateControls();
   windowEl.classList.add('grabbing');
   const finalPosition = Math.max(10, Math.min(90, position + (Math.random()*18-9)));
