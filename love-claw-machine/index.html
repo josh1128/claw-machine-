@@ -59,12 +59,30 @@
   <dialog id="win-dialog" aria-labelledby="win-title">
     <div class="modal-content letter-modal">
       <button class="close" id="close-dialog" aria-label="Close letter">×</button>
-      <p class="modal-top">✧ A LETTER JUST FOR YOU ✧</p>
-      <div class="won-emoji">💌</div>
-      <h2 id="win-title">For Elina, with love</h2>
-      <div class="love-letter" id="love-letter"></div>
-      <p class="letter-signoff">Love, Josh ♡</p>
-      <button class="play-again" id="play-again">Keep this in your heart ♡</button>
+      <div id="reveal-stage" class="reveal-stage" aria-label="A special surprise is opening">
+        <div class="reveal-aura" aria-hidden="true">✧ ♡ ✧</div>
+        <div class="envelope" aria-hidden="true">
+          <div class="envelope-letter">♡</div>
+          <div class="envelope-back"></div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-front"></div>
+          <div class="envelope-seal">♥</div>
+        </div>
+        <p class="reveal-message">You caught something from my heart...</p>
+      </div>
+      <div id="letter-reveal" class="letter-reveal" hidden>
+        <p class="modal-top">✧ A LETTER JUST FOR YOU ✧</p>
+        <div class="won-emoji">💌</div>
+        <h2 id="win-title">For Elina, with love</h2>
+        <div class="love-letter" id="love-letter"></div>
+        <div class="voice-card">
+          <div class="voice-card-heading">🎙️ A little message from me ♡</div>
+          <p>Press play to hear my voice.</p>
+          <audio id="voice-message" controls preload="metadata" src="voice-message.m4a" aria-label="Josh's personal voice message to Elina">Your browser does not support audio playback.</audio>
+        </div>
+        <p class="letter-signoff">Love, Josh ♡</p>
+        <button class="play-again" id="play-again">Keep this in your heart ♡</button>
+      </div>
     </div>
   </dialog>
   <div id="confetti" aria-hidden="true"></div>
