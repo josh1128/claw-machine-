@@ -53,3 +53,13 @@
 .daily-message{margin:13px 0 0;font:600 15px Fredoka,sans-serif;color:#bc4874}
 .daily-message[hidden]{display:none}
 @media(max-width:510px){.ticket-panel{margin-top:13px;padding:14px}.stamp-mark{width:32px;height:32px;font-size:18px}.stamp-track{gap:5px}.ticket-top{font-size:16px}}
+
+/* The single, permanent grand-prize letter. */
+.letter-modal{max-height:88vh;overflow-y:auto;overscroll-behavior:contain}
+.letter-modal h2{font-size:clamp(25px,5vw,34px)}
+#win-dialog{width:min(94vw,620px);max-height:90vh}
+.love-letter{white-space:pre-wrap;text-align:left;line-height:1.85;font-size:15px;color:#824b64;background:#fffdfd;border:1px solid #f9d5e2;border-radius:18px;padding:22px 24px;margin:22px 0;overflow-wrap:break-word}
+.letter-signoff{font:600 23px Fredoka,sans-serif;color:#df5b8c!important}
+.read-again{display:block;margin:22px auto 0;border:0;border-radius:18px;background:#eb6694;color:white;padding:13px 23px;font:600 17px Fredoka,sans-serif;cursor:pointer}
+.read-again[hidden]{display:none}
+@media(max-width:510px){.love-letter{padding:17px;font-size:14px;line-height:1.7}.letter-modal{padding:24px 17px}}
