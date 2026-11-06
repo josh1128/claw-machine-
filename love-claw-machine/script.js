@@ -37,9 +37,26 @@ function nearestCapsule() {
   }
   return { target, distance };
 }
+let revealTimer;
 function showLetter() {
   document.getElementById('love-letter').textContent = LETTER;
+  const stage = document.getElementById('reveal-stage');
+  const content = document.getElementById('letter-reveal');
+  clearTimeout(revealTimer);
+  document.getElementById('voice-message').pause();
+  stage.hidden = false;
+  stage.classList.remove('is-opening');
+  content.hidden = true;
   if (!dialog.open) dialog.showModal();
+  dialog.scrollTop = 0;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => stage.classList.add('is-opening'));
+  });
+  revealTimer = setTimeout(() => {
+    stage.hidden = true;
+    content.hidden = false;
+    dialog.scrollTop = 0;
+  }, 2800);
   updateControls();
 }
 async function play() {
@@ -100,10 +117,19 @@ left.addEventListener('click',()=>move(-1));
 right.addEventListener('click',()=>move(1));
 grab.addEventListener('click',play);
 readAgain.addEventListener('click',showLetter);
-function closeLetter() { dialog.close(); updateControls(); }
+function closeLetter() {
+  clearTimeout(revealTimer);
+  document.getElementById('voice-message').pause();
+  dialog.close();
+  updateControls();
+}
 document.getElementById('close-dialog').addEventListener('click',closeLetter);
 document.getElementById('play-again').addEventListener('click',closeLetter);
-dialog.addEventListener('close',updateControls);
+dialog.addEventListener('close', () => {
+  clearTimeout(revealTimer);
+  document.getElementById('voice-message').pause();
+  updateControls();
+});
 window.addEventListener('keydown',e=>{
   if(dialog.open||e.altKey||e.ctrlKey||e.metaKey||['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
   if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}
