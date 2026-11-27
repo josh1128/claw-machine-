@@ -1,90 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fff2f4" />
-  <meta name="description" content="A little claw machine full of love, made for Elina." />
-  <title>Elina's Love Claw Machine 💗</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <div class="background-hearts" aria-hidden="true">♡ ✧ ♡ ✧ ♡</div>
-  <main class="app">
-    <header class="intro">
-      <h1>Elina's <span>Love Arcade</span></h1>
-      <p>One special surprise is waiting for you. Catch a mystery box to open it. 💌</p>
-    </header>
-
-    <div class="layout">
-      <section class="machine-wrap" aria-label="Interactive claw machine">
-        <div class="machine">
-          <div class="machine-header"><span>♡</span> LOVE CLAW <span>♡</span></div>
-          <div class="window" id="window">
-            <div class="sparkles" aria-hidden="true">✦ <span>✧</span> ✦</div>
-            <div class="rail"></div>
-            <div class="claw-assembly" id="claw" style="left:50%;--drop:0px">
-              <div class="cable"></div>
-              <div class="claw-head"><i></i><i></i><i></i></div>
-              <div class="claw-prongs"><span></span><span></span></div>
-            </div>
-            <div class="prize mystery-capsule" style="--x:14%;--y:69%;--delay:0s" data-capsule="0"><div class="toy">🎁</div><span>?</span></div>
-            <div class="prize mystery-capsule" style="--x:28.5%;--y:78%;--delay:-0.6s" data-capsule="1"><div class="toy">🎁</div><span>?</span></div>
-            <div class="prize mystery-capsule" style="--x:43%;--y:67%;--delay:-1.2s" data-capsule="2"><div class="toy">🎁</div><span>?</span></div>
-            <div class="prize mystery-capsule" style="--x:57%;--y:78%;--delay:0s" data-capsule="3"><div class="toy">🎁</div><span>?</span></div>
-            <div class="prize mystery-capsule" style="--x:71.5%;--y:69%;--delay:-0.6s" data-capsule="4"><div class="toy">🎁</div><span>?</span></div>
-            <div class="prize mystery-capsule" style="--x:86%;--y:78%;--delay:-1.2s" data-capsule="5"><div class="toy">🎁</div><span>?</span></div>
-            <div class="window-floor"></div>
-          </div>
-          <div class="machine-panel">
-            <div class="panel-label"><span>✦</span> MYSTERY MODE <span>✦</span></div>
-            <div class="game-controls">
-              <button class="arrow" id="left" aria-label="Move claw left">←</button>
-              <button class="grab" id="grab">GRAB! <span>♡</span></button>
-              <button class="arrow" id="right" aria-label="Move claw right">→</button>
-            </div>
-            <div class="panel-foot"><div class="slot">♥ ♥ ♥</div><div class="chute">PRIZE <span>↓</span></div><div class="coin">♡</div></div>
-          </div>
-          <div class="machine-base"></div>
-        </div>
-        <p class="hint" id="status" role="status" aria-live="polite" hidden></p>
-        <button id="read-again" class="read-again" hidden>💌 Read your letter again</button>
-      </section>
-
-    </div>
-    <footer>made just for you ♡</footer>
-  </main>
-
-  <dialog id="win-dialog" aria-labelledby="win-title">
-    <div class="modal-content letter-modal">
-      <button class="close" id="close-dialog" aria-label="Close letter">×</button>
-      <div id="reveal-stage" class="reveal-stage" aria-label="A special surprise is opening">
-        <div class="reveal-aura" aria-hidden="true">✧ ♡ ✧</div>
-        <div class="envelope" aria-hidden="true">
-          <div class="envelope-letter">♡</div>
-          <div class="envelope-back"></div>
-          <div class="envelope-flap"></div>
-          <div class="envelope-front"></div>
-          <div class="envelope-seal">♥</div>
-        </div>
-        <p class="reveal-message">You caught something from my heart...</p>
-      </div>
-      <div id="letter-reveal" class="letter-reveal" hidden>
-        <p class="modal-top">✧ A LETTER JUST FOR YOU ✧</p>
-        <div class="won-emoji">💌</div>
-        <h2 id="win-title">For Elina, with love</h2>
-        <div class="love-letter" id="love-letter"></div>
-        <div class="voice-card">
-          <div class="voice-card-heading">🎙️ A little message from me ♡</div>
-          <p>Press play to hear my voice.</p>
-          <audio id="voice-message" controls preload="metadata" src="voice-message.m4a" aria-label="Josh's personal voice message to Elina">Your browser does not support audio playback.</audio>
-        </div>
-        <p class="letter-signoff">Love, Josh ♡</p>
-        <button class="play-again" id="play-again">Keep this in your heart ♡</button>
-      </div>
-    </div>
-  </dialog>
-  <div id="confetti" aria-hidden="true"></div>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Museum of Us • Josh & Elina</title><style>
+*{box-sizing:border-box}body{margin:0;background:#191613;color:#f5e9d5;font:16px system-ui,sans-serif}button,a,label.upload{cursor:pointer;color:inherit;font:inherit}button,a.upload,label.upload{border:1px solid #ad9066;background:#302821;padding:12px 18px;border-radius:4px;text-decoration:none}button:hover,label.upload:hover{background:#59432e}header{display:flex;justify-content:space-between;align-items:center;padding:20px 5%;border-bottom:1px solid #514331;gap:12px;flex-wrap:wrap}small,.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:#cfad7a;font-size:11px}h1,h2,h3{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(52px,10vw,112px);line-height:.9;margin:22px 0}h2{font-size:clamp(30px,5vw,56px);margin:10px 0}p{line-height:1.65;color:#d4c5b2}.hero{min-height:65vh;text-align:center;display:grid;place-content:center;padding:60px 24px;background:radial-gradient(ellipse at 50% 0,#765137 0,transparent 63%),linear-gradient(#231d18,#171411)}.hero p{max-width:540px;margin:12px auto 32px}.hero button{justify-self:center;background:#d4b17d;color:#201912}.main{max-width:1150px;margin:auto;padding:36px 24px 80px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}.nav button{font-size:13px}.nav button.active{background:#d4b17d;color:#21190f}.room{position:relative;overflow:hidden;border:1px solid #6f563a;min-height:430px;padding:40px 28px 85px;text-align:center;background:radial-gradient(ellipse at top,#70523c,transparent 65%),#30241e;box-shadow:inset 0 -60px #181310}.room:after{content:'';position:absolute;bottom:0;left:0;right:0;height:55px;background:repeating-linear-gradient(105deg,#31241b 0 2px,#4b3828 3px 70px);pointer-events:none}.frames{display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;margin:28px 0}.frame{width:min(100%,230px);padding:9px;background:#b18a50;border:4px ridge #d1aa6a;box-shadow:0 14px 24px #0008;transition:transform .2s;position:relative}.frame:hover{transform:translateY(-5px)}.frame img{width:100%;height:210px;object-fit:cover;display:block;border:6px solid #eee0c6}.frame span{display:grid;place-content:center;height:180px;background:#e9dcc6;color:#5a4934;font:46px Georgia}.frame small{display:block;background:#292019;color:#edd4a8;padding:10px 3px;letter-spacing:.07em}.caption{font-family:Georgia;font-style:italic}.controls{display:flex;justify-content:space-between;align-items:center;margin:16px 0;gap:8px}.progress{height:4px;background:#46382b;margin-top:15px}.progress i{display:block;background:#d7b57e;height:100%;transition:width .4s}.import{margin-top:30px;border-top:1px solid #514331;padding-top:20px}input[type=file]{max-width:100%;margin:12px 0;color:#d4c5b2}dialog{background:#261e19;color:#f5e9d5;border:1px solid #ad9066;max-width:min(92vw,780px);max-height:90vh;padding:24px;text-align:center}dialog::backdrop{background:#000d}dialog img{max-width:100%;max-height:65vh;object-fit:contain}dialog button{display:block;margin:12px auto}.final{padding:32px;background:#2c231c;text-align:center;margin-top:26px;border:1px solid #665039}.final a{display:inline-block;margin:12px;color:#e7c58e}footer{text-align:center;padding:28px;color:#bba381;font-size:12px}@media(max-width:550px){.room{padding:30px 12px 70px}.frames{gap:15px}.frame{width:140px}.frame img{height:145px}.frame span{height:115px}.controls button{padding:10px}.hero{min-height:55vh}}@media(prefers-reduced-motion:no-preference){.room{animation:appear .5s ease}@keyframes appear{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style></head><body><header><div><small>Private collection / browser-local photos</small><br>J & E — Museum of Us</div><a href="arcade.html">Original love arcade ↗</a></header><section class="hero"><small>Permanent exhibition • Two lives, one story</small><h1>Museum<br>of Us.</h1><p>A little museum dedicated to the adventures, silly moments, quiet sunsets and ordinary days that make our story ours.</p><button id="enter">Enter the exhibition →</button></section><main class="main" id="museum"><small id="count"></small><div class="progress"><i id="bar"></i></div><nav class="nav" id="nav" aria-label="Gallery rooms"></nav><section id="room" class="room" aria-live="polite"></section><div class="controls"><button id="prev">← Previous</button><span id="number"></span><button id="next">Next room →</button></div><section class="import"><h3>Curate your memories</h3><p>Choose photos for the current gallery. They remain in this browser's IndexedDB and are not uploaded. Add more photos whenever you like.</p><input type="file" id="photos" accept="image/*" multiple><button id="clear">Clear this gallery's photos</button><p id="status" role="status"></p></section><section id="final" class="final" hidden><small>Final exhibition</small><h2>To all the memories we haven't made yet.</h2><p>There is always room for one more adventure, one more photograph, and one more day together.</p><a href="arcade.html">Open the original surprise letter in the love arcade ♡</a></section></main><dialog id="view"><img id="full" alt="Selected memory"><p id="detail"></p><button id="close">Close exhibit</button></dialog><footer>Made with love • A collection that never ends</footer><script>
+const rooms=[['The Flower Lights','🌸','A night surrounded by glowing flowers.'],['Arcade Nights','🕹️','A little competition, a lot of laughter.'],['The Kitchen','🍰','Making something sweet together.'],['Dinner for Two','🕯️','Dressed up and making time for us.'],['By the Sea','🐚','A picnic, a breeze, and nowhere else to be.'],['Festival Days','🎡','Bright lights and adventures with friends.'],['On the Court','🏐','Our shared love of the game.'],['The Silly Gallery','🍣','The moments we never have to take seriously.'],['Photo Booth','📷','Four little frames, countless expressions.'],['Steveston Wharf','⚓','A sunny day by the water.'],['The Lookout','🌲','A quiet moment above the water.'],['Birthday Picnic','🎂','A little celebration, made with love.'],['Little Moments','♡','Even the ordinary moments deserve a frame.']];
+const $=id=>document.getElementById(id);let current=0,visited=new Set(),db,urls=[],renderVersion=0;
+try{visited=new Set(JSON.parse(localStorage.getItem('museum-visited')||'[]'))}catch(e){}
+function database(){return new Promise((resolve,reject)=>{const q=indexedDB.open('museum-of-us',1);q.onupgradeneeded=()=>q.result.createObjectStore('photos',{keyPath:'id'});q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
+function request(mode,fn){return new Promise((resolve,reject)=>{if(!db){reject(Error('Local storage unavailable'));return}const tx=db.transaction('photos',mode);const q=fn(tx.objectStore('photos'));tx.oncomplete=()=>resolve(q.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)})}
+function make(tag,txt,cls){const e=document.createElement(tag);if(txt)e.textContent=txt;if(cls)e.className=cls;return e}
+function show(i){current=(i+rooms.length)%rooms.length;visited.add(current);try{localStorage.setItem('museum-visited',JSON.stringify([...visited]))}catch(e){}render()}
+async function render(){const version=++renderVersion, i=current;urls.forEach(URL.revokeObjectURL);urls=[];const [name,icon,desc]=rooms[i];$('nav').replaceChildren(...rooms.map((r,j)=>{const b=make('button',r[0],i===j?'active':'');b.onclick=()=>show(j);b.setAttribute('aria-pressed',String(i===j));return b}));$('count').textContent=visited.size+' / '+rooms.length+' galleries visited';$('bar').style.width=100*visited.size/rooms.length+'%';$('number').textContent=(i+1)+' / '+rooms.length;$('final').hidden=visited.size!==rooms.length;const room=$('room');room.replaceChildren(make('small','Gallery '+String(i+1).padStart(2,'0')),make('h2',name),make('p',desc,'caption'));const frames=make('div','','frames');room.append(frames);let all=[];if(db)try{all=(await request('readonly',s=>s.getAll())).filter(p=>p.room===i)}catch(e){$('status').textContent='Unable to read local photos.'}if(version!==renderVersion)return;if(!all.length){for(let j=0;j<3;j++){const f=make('div','','frame');f.append(make('span',icon),make('small','Awaiting a memory'));frames.append(f)}}else all.forEach((p,j)=>{const url=URL.createObjectURL(p.blob);urls.push(url);const b=make('button','','frame');const img=make('img');img.src=url;img.alt=name+' memory '+(j+1);b.append(img,make('small','Memory '+String(j+1).padStart(2,'0')));b.onclick=()=>{$('full').src=url;$('detail').textContent=desc;$('view').showModal()};frames.append(b)});if(i===1){const a=make('a','Play our original claw machine →');a.href='arcade.html';room.append(a)}}
+$('enter').onclick=()=>{$('museum').scrollIntoView({behavior:'smooth'});show(current)};$('prev').onclick=()=>show(current-1);$('next').onclick=()=>show(current+1);$('close').onclick=()=>$('view').close();$('view').addEventListener('close',()=> $('full').removeAttribute('src'));document.addEventListener('keydown',e=>{if($('view').open||['INPUT','BUTTON'].includes(document.activeElement.tagName))return;if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1)});
+$('photos').onchange=async e=>{const i=current;try{for(const f of e.target.files){if(!f.type.startsWith('image/'))continue;await request('readwrite',s=>s.put({id:crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random(),room:i,blob:f}))}$('status').textContent='Memories saved on this device.';render()}catch(err){$('status').textContent='Could not save photos: '+err.message}e.target.value=''};
+$('clear').onclick=async()=>{const i=current;if(!confirm('Remove locally stored photos from this gallery?'))return;try{const all=await request('readonly',s=>s.getAll());for(const p of all.filter(p=>p.room===i))await request('readwrite',s=>s.delete(p.id));render()}catch(e){$('status').textContent='Unable to clear photos.'}};
+database().then(x=>{db=x;show(0)}).catch(()=>{$('status').textContent='Local photo storage is unavailable in this browser.';show(0)});
+</script></body></html>
